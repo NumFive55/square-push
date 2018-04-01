@@ -16,12 +16,10 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	void Update () {
-//		rb.velocity = -transform.forward * Random.Range(MinThrust, MaxThrust);
 		rb.velocity = -transform.forward * thrust;
 	}
 
-	void OnTriggerEnter(Collider other) {
-		Debug.Log ("Reached the end");
+	void OnTriggerEnter(Collider other) {		
 		enabled = false;
 		rb.mass = 100;
 	}

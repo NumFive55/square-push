@@ -124,4 +124,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinThrust: 2
-  MaxThrust: 6
+  MaxThrust: 7
