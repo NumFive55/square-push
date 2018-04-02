@@ -15,9 +15,11 @@ public class GameController : MonoBehaviour {
 	private float timer;
 	private float topScore;
 	private bool alive;
+	private bool pause;
 
 	void Start () {
 		alive = true;
+		pause = false;
 		restartButton.gameObject.SetActive (false);
 		StartCoroutine(Spawn ());	
 		timer = 0;
@@ -32,17 +34,26 @@ public class GameController : MonoBehaviour {
 		}
 
 		if (alive == false) {
+			// STOPS THE TIMER
 			timer = timer;
 
+			// SETS TOP SCORE VALUE IF THE TIMER IS GREATER THAN TOPSCORE VALUE
 			if (timer > topScore) {
 				topScore = timer;
 				topScoreText.text = "TOP " + topScore.ToString("f0");
 				PlayerPrefs.SetFloat ("highscore", topScore);
 			}
-
 		}
-
 	}	
+
+	public void Pause () {
+		if (pause == false) {
+			// freeze all enemy and player rigidbodies + timer
+			StopCoroutine(Spawn ());
+		} else if (pause == true) {
+			
+		}
+	}
 
 	public void GameOver () {		
 		alive = false;
@@ -52,8 +63,7 @@ public class GameController : MonoBehaviour {
 	public void Restart () {
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);
 	}
-
-
+		
 	IEnumerator Spawn () {
 
 		while (true) {
